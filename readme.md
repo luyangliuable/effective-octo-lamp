@@ -20,7 +20,7 @@ With this tool, you can set up a schedule for committing your changes, so you ca
 git submodule add https://github.com/luyangliuable/effective-octo-lamp.git auto-commit
 ```
 
-* Use <kbd>cron -</kbd>e or <kbd>crontab -e</kbd> depending on mac os linux.
+* Use <kbd>cron -e</kbd> or <kbd>crontab -e</kbd> depending on mac os linux.
 
 * Add the follow line which checks every 30 minutes for enough changes to commit
 ```sh
