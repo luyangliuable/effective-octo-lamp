@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # TODO Added following line to cron -e
-# */30 * * * * cd $PATH_TO_FOLDER && $PATH_TO_FOLDER/coding-notes/auto-commit.sh
+# */30 * * * * cd $PATH_TO_FOLDER && $PATH_TO_FOLDER/auto-commit/auto-commit.sh
 
 function commit() {
     modified=$1
@@ -30,7 +30,7 @@ function auto_commit() {
     # Print the received argument
     echo "Received argument $1"
 
-    LINES_TRIGGER=40
+    LINES_TRIGGER=0
 
     # Get the list of modified files
     modified=$(git status | awk '/modified:/ { print $2 }')
