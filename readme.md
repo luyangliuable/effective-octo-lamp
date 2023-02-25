@@ -1,9 +1,12 @@
 # Effective Octo Lamp: Autocommiter Tool
+
 <!-- markdown-toc start - Don't edit this section. Run M-x markdown-toc-refresh-toc -->
 **Table of Contents**
 
 - [Effective Octo Lamp: Autocommiter Tool](#effective-octo-lamp-autocommiter-tool)
-    - [How t](#how-t)
+    - [How To Use](#how-to-use)
+        - [Change Number of Lines Changes Triggering A Commit and Push](#change-number-of-lines-changes-triggering-a-commit-and-push)
+        - [Roadmap](#roadmap)
 
 <!-- markdown-toc end -->
 
