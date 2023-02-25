@@ -37,3 +37,10 @@ LINES_TRIGGER=0
 ```
 
 With the number of changes lines of code.
+
+### Roadmap
+
+  * [ ] Use chatgpt to generate commit messages (when api releases)
+  * [ ] Allow user to customise which folder to watch (ignore feature)
+  * [ ] Allow user to review push/commit actions
+
