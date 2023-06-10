@@ -3,6 +3,8 @@
 # TODO Added following line to cron -e
 # */30 * * * * cd $PATH_TO_FOLDER && $PATH_TO_FOLDER/auto-commit/auto-commit.sh
 
+source ./ai-git-commit-message.sh
+
 function commit() {
     modified=$1
     untracked=$2
@@ -15,6 +17,8 @@ function commit() {
     elif [ -n "$untracked" ] && [ -z "$modified" ]; then
         gitmessage="Autocommit: Added notes on $untracked."
     fi
+
+    gitmessage=$(generate_git_message)
 
     # Add all changes
     git add .
@@ -59,7 +63,6 @@ function auto_commit() {
     fi 
 
     echo $gitmessage
-
 }
 
 # Call the function with no arguments
