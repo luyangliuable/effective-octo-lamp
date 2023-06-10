@@ -21,8 +21,6 @@ data = {
     ]
 }
 
-print(content);
-
 headers = {
     "Content-Type": "application/json",
     "Authorization": "Bearer $OPENAI_API_KEY"

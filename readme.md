@@ -17,6 +17,12 @@ With this tool, you can set up a schedule for committing your changes, so you ca
 
 
 ## How To Use
+* Add your openai token. I didn't include one because I don't want to go bankrupt.
+  * Or add it inside your .bashrc or .zshrc
+```sh
+export OPENAI_API_KEY=adjasldnasdkjnasdojqwno
+```
+
 * Add to your personal git repo
 
 ```sh
