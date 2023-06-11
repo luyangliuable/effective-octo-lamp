@@ -38,7 +38,18 @@ File changes:
 $modified_files
 $modified_file_changes"
 
-    python3 << END
+    PYTHON_CMD=python3
+    if ! command -v $PYTHON_CMD &> /dev/null; then
+        PYTHON_CMD=python
+        if ! command -v $PYTHON_CMD &> /dev/null && [ "$OS" == "Windows_NT" ]; then
+            PYTHON_CMD="py -3"
+            if ! command -v $PYTHON_CMD &> /dev/null; then
+                PYTHON_CMD="py -2"
+            fi
+        fi
+    fi
+
+    $PYTHON_CMD << END
 import json
 import requests
 
