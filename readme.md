@@ -15,6 +15,9 @@ Welcome to the Effective Octo Lamp, a powerful and efficient autocommiter tool t
 
 With this tool, you can set up a schedule for committing your changes, so you can choose how often you want your changes to be committed. This means you can focus on writing code, and let the script handle the tedious task of committing and pushing your changes for you. This is especially useful for developers who want to keep their repos up-to-date without interrupting their workflow.
 
+## Disclaimer
+* Data of all code may get stored if you choose to this tool. Please make sure with organisation if this is allowed.
+* Not responsible for issues caused inside git.
 
 ## How To Use
 * Add your openai token. I didn't include one because I don't want to go bankrupt.

@@ -3,8 +3,10 @@
 # TODO Added following line to cron -e
 # */30 * * * * cd $PATH_TO_FOLDER && $PATH_TO_FOLDER/auto-commit/auto-commit.sh
 
+# Get the directory of the current script
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
 
-source ./ai-git-commit-message.sh
+source "$DIR/ai-git-commit-message.sh"
 
 # You can call the script with a directory path as an argument like this:
 # ./auto-commit.sh /path/to/your/directory
