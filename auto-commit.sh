@@ -3,6 +3,7 @@
 # TODO Added following line to cron -e
 # */30 * * * * cd $PATH_TO_FOLDER && $PATH_TO_FOLDER/auto-commit/auto-commit.sh
 
+
 source ./ai-git-commit-message.sh
 
 function commit() {
@@ -12,6 +13,10 @@ function commit() {
     if gitmessage=$(generate_git_message); then
         echo "Commit message generated successfully."
     else
+
+        echo "Failed to generate commit message using AI."
+        exit 1
+
         echo "Generating commit message failed. Using alternative approach."
         untracked=$(git ls-files --others --exclude-standard)
         modified=$(git diff --name-only)

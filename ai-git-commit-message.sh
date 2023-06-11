@@ -5,7 +5,7 @@ function generate_git_message() {
 
     message="Write me a git commit message based on the following:\n\n File change: $modifiedfiles \n$changes"
 
-    python << END
+    python3 << END
 import json
 import requests
 
@@ -32,5 +32,3 @@ response = requests.post('https://api.openai.com/v1/chat/completions', headers=h
 print(response.json()['choices'][0]['message'][ 'content' ])
 END
 }
-
-generate_git_message
