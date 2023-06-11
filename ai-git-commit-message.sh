@@ -1,3 +1,5 @@
+#!/bin/bash
+
 function generate_git_message() {
     new_files_output=$(git ls-files --others --exclude-standard)
 
@@ -17,46 +19,44 @@ function generate_git_message() {
         fi
     done)
 
-    modifiedfiles=$(git status | awk '/modified:/ { print $2 }')
+    modified_files=$(git status | awk '/modified:/ { print $2 }')
 
-    modifiedfilechanges=$(git diff --unified=0 | tr -dc '[:alnum:][]()+-. \n')
+    modified_file_changes=$(git diff --unified=0 | tr -dc '[:alnum:][]()+-. \n')
 
-    removedfiles=$(git status | awk '/deleted:/ { print $2 }')
+    removed_files=$(git status | awk '/deleted:/ { print $2 }')
 
     message="Write me a git commit message based on the following:\n\n\
-Removed files:\n$removedfiles\n\n\
+Removed files:\n$removed_files\n\n\
 Newfilechanges: $new_file_contents\n\n\
-File changes: $modifiedfiles \n\
-$modifiedfilechanges"
+File changes: $modified_files \n\
+$modified_file_changes"
 
-    echo "$message"
+    python3 << END
+import json
+import requests
 
-#     python3 << END
-# import json
-# import requests
+content = """$message"""
 
-# content = """$message"""
+data = {
+    "model": "gpt-3.5-turbo",
+    "messages": [
+        {
+            "role": "user", 
+            "content": content
+        }
+    ]
+}
 
-# data = {
-#     "model": "gpt-3.5-turbo",
-#     "messages": [
-#         {
-#             "role": "user", 
-#             "content": content
-#         }
-#     ]
-# }
+headers = {
+    "Content-Type": "application/json",
+    "Authorization": "Bearer $OPENAI_API_KEY"
+}
 
-# headers = {
-#     "Content-Type": "application/json",
-#     "Authorization": "Bearer $OPENAI_API_KEY"
-# }
+response = requests.post('https://api.openai.com/v1/chat/completions', headers=headers, data=json.dumps(data))
 
-# response = requests.post('https://api.openai.com/v1/chat/completions', headers=headers, data=json.dumps(data))
-
-# # print(response.json())
-# print(response.json()['choices'][0]['message'][ 'content' ])
-# END
+# print(response.json())
+print(response.json()['choices'][0]['message'][ 'content' ])
+END
 }
 
 generate_git_message
