@@ -9,16 +9,21 @@ function commit() {
     modified=$1
     untracked=$2
 
-    # Create commit message with the modified and untracked files
-    if [ -z "$untracked" ] && [ -n "$modified" ]; then
-        gitmessage="Autocommit: Modified $modified."
-    elif [ -n "$untracked" ] && [ -n "$modified" ]; then
-        gitmessage="Autocommit: Added notes on $untracked. Modified notes $modified."
-    elif [ -n "$untracked" ] && [ -z "$modified" ]; then
-        gitmessage="Autocommit: Added notes on $untracked."
-    fi
+    if gitmessage=$(generate_git_message); then
+        echo "Commit message generated successfully."
+    else
+        echo "Generating commit message failed. Using alternative approach."
+        untracked=$(git ls-files --others --exclude-standard)
+        modified=$(git diff --name-only)
 
-    gitmessage=$(generate_git_message)
+        if [ -n "$untracked" ] && [ -n "$modified" ]; then
+            gitmessage="Autocommit: Added notes on $untracked. Modified notes $modified."
+        elif [ -z "$untracked" ] && [ -n "$modified" ]; then
+            gitmessage="Autocommit: Modified $modified."
+        elif [ -n "$untracked" ] && [ -z "$modified" ]; then
+            gitmessage="Autocommit: Added notes on $untracked."
+        fi
+    fi
 
     # Add all changes
     git add .
@@ -59,7 +64,7 @@ function auto_commit() {
     if [ $total -ge $LINES_TRIGGER ]; then
         commit $modified $untracked
     else
-      echo "No commit necessary since only $total lines of code changed"
+        echo "No commit necessary since only $total lines of code changed"
     fi 
 
     echo $gitmessage
