@@ -1,9 +1,11 @@
 function generate_git_message() {
+    newfiles=$1
+
     modifiedfiles=$(git status | awk '/modified:/ { print $2 }')
 
     changes=$(git diff --unified=0 | tr -dc '[:alnum:][]()+-. \n')
 
-    message="Write me a git commit message based on the following:\n\n File change: $modifiedfiles \n$changes"
+    message="Write me a git commit message based on the following:\n\nNewfiles: $newfiles\nFile change: $modifiedfiles \n$changes"
 
     python3 << END
 import json

@@ -10,16 +10,16 @@ function commit() {
     modified=$1
     untracked=$2
 
-    if gitmessage=$(generate_git_message); then
+    untracked=$(git ls-files --others --exclude-standard)
+    modified=$(git diff --name-only)
+
+    if gitmessage=$(generate_git_message $untracked $modified); then
         echo "Commit message generated successfully."
     else
 
-        echo "Failed to generate commit message using AI."
+        echo "Generating commit message failed. Using alternative approach."
         exit 1
 
-        echo "Generating commit message failed. Using alternative approach."
-        untracked=$(git ls-files --others --exclude-standard)
-        modified=$(git diff --name-only)
 
         if [ -n "$untracked" ] && [ -n "$modified" ]; then
             gitmessage="Autocommit: Added notes on $untracked. Modified notes $modified."
