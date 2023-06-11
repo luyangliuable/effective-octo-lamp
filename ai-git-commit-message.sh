@@ -1,7 +1,7 @@
 function generate_git_message() {
     modifiedfiles=$(git status | awk '/modified:/ { print $2 }')
 
-    changes=$(git diff | tr -dc '[:alnum:][]() \n')
+    changes=$(git diff --unified=0 | tr -dc '[:alnum:][]()+-. \n')
 
     message="Write me a git commit message based on the following:\n\n File change: $modifiedfiles \n$changes"
 
@@ -32,3 +32,5 @@ response = requests.post('https://api.openai.com/v1/chat/completions', headers=h
 print(response.json()['choices'][0]['message'][ 'content' ])
 END
 }
+
+generate_git_message
