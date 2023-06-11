@@ -25,10 +25,17 @@ function generate_git_message() {
 
     removed_files=$(git status | awk '/deleted:/ { print $2 }')
 
-    message="Write me a git commit message based on the following:\n\n\
-Removed files:\n$removed_files\n\n\
-Newfilechanges: $new_file_contents\n\n\
-File changes: $modified_files \n\
+    message="
+Write me a git commit message based on the following:
+
+Removed files:
+$removed_files
+
+New file changes: 
+$new_file_contents
+
+File changes: 
+$modified_files
 $modified_file_changes"
 
     python3 << END
