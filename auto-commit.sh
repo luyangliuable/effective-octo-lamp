@@ -6,6 +6,10 @@
 
 source ./ai-git-commit-message.sh
 
+# You can call the script with a directory path as an argument like this:
+# ./auto-commit.sh /path/to/your/directory
+cd "$1"
+
 function commit() {
     modified=$1
     untracked=$2
@@ -19,7 +23,6 @@ function commit() {
 
         echo "Generating commit message failed. Using alternative approach."
         exit 1
-
 
         if [ -n "$untracked" ] && [ -n "$modified" ]; then
             gitmessage="Autocommit: Added notes on $untracked. Modified notes $modified."
