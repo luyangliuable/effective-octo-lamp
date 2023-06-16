@@ -26,7 +26,7 @@ function generate_git_message() {
     removed_files=$(git status | awk '/deleted:/ { print $2 }')
 
     message="
-Write me a git commit message based on the following:
+Write me a one line git commit message based on the following:
 
 Removed files:
 $removed_files
