@@ -56,7 +56,7 @@ import requests
 content = """$message"""
 
 data = {
-    "model": "gpt-3.5-turbo",
+    "model": "gpt-3.5-turbo-16k",
     "messages": [
         {
             "role": "user", 
